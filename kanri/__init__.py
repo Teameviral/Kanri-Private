@@ -21,6 +21,7 @@ dev_users = list(map(int, dev_users))
 operators = kanriconf.get("operators")
 operators = list(map(int, operators))
 postgres_url = kanriconf.get("postgres_url")
+CF_API_KEY = kanriconf.get("CF_API_KEY", None)
 
 plugins = parser["plugins"]
 include = plugins.get("include")
