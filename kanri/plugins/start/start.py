@@ -1,6 +1,8 @@
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from kanri import kanri
+from kanri import KLOCAL
+
+kanri = KLOCAL.client
 
 prvt_message = '''
 Hey there! My name is Kanri - I'm here to help you manage your groups!

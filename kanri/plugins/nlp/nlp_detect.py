@@ -1,8 +1,11 @@
 from pyrogram import filters
 from pyrogram.errors import BadRequest
 from pyrogram.types import ChatPermissions
-from kanri import kanri, CF_API_KEY
 import aiohttp, json, asyncio
+from kanri import KLOCAL
+
+kanri = KLOCAL.client
+CF_API_KEY = KLOCAL.CF_API_KEY
 
 session = aiohttp.ClientSession()
 
@@ -47,6 +50,6 @@ async def nlp_detect(client, message):
                             f"**⚠ SPAM DETECTED!**\nSpam Prediction: `{pred}`\nUser: `{user.id}` was muted.", parse_mode="markdown")
                     except BadRequest:
                         await message.reply_text(f"**⚠ SPAM DETECTED!**\nSpam Prediction: `{pred}`\nUser: `{user.id}`\nUser could not be restricted due to insufficient admin perms.", parse_mode="markdown")
-        except (aiohttp.ClientConnectionError, asyncio.TimeoutError):
-            log.warning("Can't reach SpamProtection API")
-            await asyncio.sleep(0.5)
+        except BaseException as e:
+            log.warning(f"Can't reach SpamProtection API due to: {e}")
+            return
